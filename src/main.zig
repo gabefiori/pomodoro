@@ -48,9 +48,9 @@ pub fn main() !void {
         }
 
         if (timer.duration < 1) {
+            app.notify(allocator);
             app.end_interval();
             timer.reset(app.current_duration());
-            app.notify(allocator);
         }
 
         if (app.is_running) {
