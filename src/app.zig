@@ -7,10 +7,10 @@ const Color = @import("raylib").Color;
 const timer = @import("timer.zig");
 
 pub const App = struct {
-    state: State = .focus,
-    focus_count: u8 = 0,
-    is_running: bool = false,
     durations: timer.Durations = timer.Durations{},
+    focus_count: u32 = 0,
+    state: State = .focus,
+    is_running: bool = false,
 
     pub const State = enum {
         focus,
