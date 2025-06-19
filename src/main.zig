@@ -8,9 +8,6 @@ const Timer = @import("timer.zig").Timer;
 const bounds = @import("bounds.zig");
 const Config = @import("config.zig").Config;
 
-const raywhite_int = raylib.Color.ray_white.toInt();
-const white_int = raylib.Color.white.toInt();
-
 pub fn main() !void {
     const allocator = std.heap.c_allocator;
 
@@ -30,12 +27,8 @@ pub fn main() !void {
     raylib.initWindow(800, 600, "Pomodoro");
     defer raylib.closeWindow();
 
-    raygui.setStyle(.default, .{ .default = .text_size }, 18);
-    raygui.setStyle(.default, .{ .control = .base_color_normal }, raywhite_int);
-    raygui.setStyle(.default, .{ .control = .base_color_focused }, white_int);
-    raygui.setStyle(.default, .{ .control = .base_color_pressed }, white_int);
-
     app.set_window_title();
+    set_gui_styles();
 
     while (!raylib.windowShouldClose()) {
         if (raylib.isKeyPressed(.q)) {
@@ -88,4 +81,14 @@ pub fn main() !void {
 
         timer.draw();
     }
+}
+
+fn set_gui_styles() void {
+    const raywhite_int = comptime raylib.Color.ray_white.toInt();
+    const white_int = comptime raylib.Color.white.toInt();
+
+    raygui.setStyle(.default, .{ .default = .text_size }, 18);
+    raygui.setStyle(.default, .{ .control = .base_color_normal }, raywhite_int);
+    raygui.setStyle(.default, .{ .control = .base_color_focused }, white_int);
+    raygui.setStyle(.default, .{ .control = .base_color_pressed }, white_int);
 }
